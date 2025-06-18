@@ -29,7 +29,7 @@ func handle_movement() -> void:
 		else:
 			state = State.WALK
 	else:
-		velocity = Vector2.RIGHT	
+		velocity = Vector2.ZERO	
 		
 func handle_input():
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -63,6 +63,6 @@ func on_action_complete() -> void:
 	state = State.IDLE
 
 func on_emit_damage(damage_receiver: DamageReceiver) -> void:
-	#increase score
-	damage_receiver.damage_received.emit(damage)
+	var direction := Vector2.LEFT if damage_receiver.global_position.x < global_position.x else Vector2.RIGHT
+	damage_receiver.damage_received.emit(damage, direction)
 	print(damage_receiver)
