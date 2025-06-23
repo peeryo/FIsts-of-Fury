@@ -102,7 +102,7 @@ func  on_land_complete() -> void:
 	state = State.IDLE
 
 func on_receive_damage(damage : int, direction: Vector2) -> void:
-	current_health = clamp(current_health, 0, max_health)
+	current_health = clamp(current_health - damage, 0, max_health)
 	if current_health <= 0:
 		queue_free()
 	else:
